@@ -1,0 +1,39 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2862
+
+我喜欢这个插件,我觉得很方便所以我修改了下感谢zuopeng chen提供的脚本
+
+此代码修改于http://www.vim.org/scripts/script.php?script_id=2770 也是自动生成tags和cscope,但它生成的文件是在当前目录/OutDB/下
+
+提示：
+      请确定了你已安装了ctags和cscope， 如果是windows请把ctags.exe和cscope.exe放到$VIM\vim7* 目录下。
+       ctags 和cscope Win32版： http://code.google.com/p/easy-vim/ 
+
+
+--------------------华丽的分界线------------------
+***** 1.03vesion *******
+
+command:
+<leader>jc  Generate tags and cscope database from current directory to :
+                    生成当前目录的tags和cscope到:
+
+all OS  //buillding file in Current Directory
+CurrentDirectory(当前目录)/OutDB/cscope.out,tags
+
+other command 
+<leader>jst       list existed tags full name and choose tags
+                          列举已存在tags的全路径,选择要使用的tags 
+<leader>jsc      list existed cscope database full name and choose cscope.out 
+                          列举已存在cscope的数据库的全路径, 选择要使用的cscope.out 
+
+----------------------------------------------------------
+
+Thanks to zuopeng chen .
+the code change from http://www.vim.org/scripts/script.php?script_id=2770.
+also auto build tags & cacope ,but this script build path at CurrentDirectory/OutDB in all OS
+
+Additional:
+        Please insure you have installed ctags and cscope, Win32 Vim puts ctags.exe and cscope.exe in $VIM\vim7*
+
+        ctags and cscope for win32 you can download from : http://code.google.com/p/easy-vim/
+
+vim default <leader> is " \ "  :P
