@@ -47,7 +47,7 @@ if has ("WIN32")
     let s:quotation = '"'
 else
     let s:executable_postfix = ''
-    let s:path_prefix = $HOME . '/'
+    let s:path_prefix = './'
     let s:slash = '/'
     let s:quotation = ''
 endif
@@ -248,9 +248,9 @@ function! s:SetupTagsEnv ()
     let s:cur_tags_full_path_no_quotation = substitute (s:cur_tags_full_path_no_quotation, "\\\\", "\\\\\\\\", "g")
     let s:JumpInCodeUserTags = substitute(g:JumpInCodeUserTags,"\\","\\\\\\\\","g")
     exec 'let $TAGS_PATH="./tags,tags,' . s:JumpInCodeUserTags . ',' . s:cur_tags_full_path_no_quotation . '"'
-    echo ':set tags=' . $TAGS_PATH
     set tags=$TAGS_PATH
     exec 'rewind'
+    echo ':set tags=' . $TAGS_PATH
 endfunction
 "}}}
 
@@ -415,9 +415,9 @@ function! <SID>SetupTagsDatabaseEnvironment (db_full_name, operation_type)
     let s:cur_tags_full_path_no_quotation = substitute (s:cur_tags_full_path_no_quotation, "\\\\", "\\\\\\\\", "g")
     let s:JumpInCodeUserTags = substitute(g:JumpInCodeUserTags,"\\","\\\\\\\\","g")
     exec 'let $TAGS_PATH="./tags,tags,' . s:JumpInCodeUserTags . ',' . s:cur_tags_full_path_no_quotation . '"'
-    echo ':set tags=' . $TAGS_PATH
     set tags=$TAGS_PATH
-    exec 'rewind'
+"    exec 'rewind'
+    echo ':set tags=' . $TAGS_PATH
     :q!
 endfunction
 "}}}
