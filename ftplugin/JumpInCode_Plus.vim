@@ -23,10 +23,6 @@
 "
 "Initialization {{{
 
-if !exists('g:JumpInCodeUserTags')
-    let g:JumpInCodeUserTags = ''
-endif
-
 if exists("g:JumpInCodeVersion")
     finish
 endif
@@ -85,7 +81,7 @@ endfunction
 function! s:GenerateCtagsCmd ()
     "tags args variable
     "!ctags -f $HOME/.rd/***/tags -R --c++-kinds=+p --fields=+iaS --extra=+q --tag-relative=no'
-    let s:ctags_args = ' -f ' . s:GetCurTagsDatabaseFullPath () .
+    let s:ctags_args = ' -f ' . s:GetCurTagsDatabaseFullPath() . 
                 \' -R --c++-kinds=+p --fields=+aiS --extra=+q --tag-relative=no' . 
                 \' -L ' . s:GetListFileFullPath ()
     return s:ctags_exe_name . s:ctags_args
@@ -110,7 +106,7 @@ let s:cscope_db_record_file_name = '.cscope_db_list'
 let s:list_file_name = 'file.list'
 "}}}
 "tags and cscope database path {{{
-let s:database_path = s:path_prefix . '.OutDB'
+let s:database_path = s:path_prefix . 'OutDB'
 "}}}
 "ctags executable file name {{{
 let s:ctags_exe_name   = 'ctags' . s:executable_postfix
@@ -245,12 +241,8 @@ function! s:SetupTagsEnv ()
         return
     endif
 
-    let s:cur_tags_full_path_no_quotation = substitute (s:cur_tags_full_path_no_quotation, "\\\\", "\\\\\\\\", "g")
-    let s:JumpInCodeUserTags = substitute(g:JumpInCodeUserTags,"\\","\\\\\\\\","g")
-    exec 'let $TAGS_PATH="./tags,tags,' . s:JumpInCodeUserTags . ',' . s:cur_tags_full_path_no_quotation . '"'
-    set tags=$TAGS_PATH
-    exec 'rewind'
-    echo ':set tags=' . $TAGS_PATH
+	exec 'set tags+=' . s:cur_tags_full_path_no_quotation
+	echo ':set tags=' . &tags 
 endfunction
 "}}}
 
@@ -259,7 +251,6 @@ function! s:CscopeDatabaseCreate ()
     if executable (s:cscope_exe_name)
         :cs kill -1
         if s:CreateDirectory (s:database_path) == 'true'
-            "echo s:cscope_exe_name . s:cscope_args
             echo s:GenerateCscopeCmd ()
             call system (s:GenerateCscopeCmd ())
 
@@ -412,12 +403,8 @@ function! <SID>SetupTagsDatabaseEnvironment (db_full_name, operation_type)
         return
     endif
 
-    let s:cur_tags_full_path_no_quotation = substitute (s:cur_tags_full_path_no_quotation, "\\\\", "\\\\\\\\", "g")
-    let s:JumpInCodeUserTags = substitute(g:JumpInCodeUserTags,"\\","\\\\\\\\","g")
-    exec 'let $TAGS_PATH="./tags,tags,' . s:JumpInCodeUserTags . ',' . s:cur_tags_full_path_no_quotation . '"'
-    set tags=$TAGS_PATH
-"    exec 'rewind'
-    echo ':set tags=' . $TAGS_PATH
+	exec 'set tags+=' . s:cur_tags_full_path_no_quotation
+	echo ':set tags=' . &tags 
     :q!
 endfunction
 "}}}
